@@ -1,6 +1,7 @@
 class PostImagesController < ApplicationController
   def new
     @post_image=PostImage.new
+    @user = User.new
   end
 
   def index
@@ -8,6 +9,10 @@ class PostImagesController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:id])
+    @post_images = @user.post_images
+
+
   end
 
   def create
@@ -16,6 +21,13 @@ class PostImagesController < ApplicationController
     @post_image.save
     redirect_to post_images_path
   end
+
+  def destroy
+    @post_image=PostImage.find(params[:id])
+    @post_image.destroy
+    redirect_to post_images_path
+  end
+
 
   private
 
