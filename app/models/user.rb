@@ -8,6 +8,9 @@ class User < ApplicationRecord
 
   has_one_attached :profile_image
 
+  has_many :post_comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+
   def get_profile_image(size)
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/sample-author1.jpg')
